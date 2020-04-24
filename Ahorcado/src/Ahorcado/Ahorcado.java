@@ -64,10 +64,19 @@ public class Ahorcado {
 							"Las normas son muy sencillas tienes 6 intentos y solo puedes poner letras no se aceptan ni numeros ni espacios");
 					System.out.println("No se puede repetir las letras que ya has escrito");
 					break;
-				/*
-				 * case 2:// juego total del ahorcado for (int i = 0; i < palSepar.length; i++)
-				 * { if (opcion == palSepar[i]) { // metodo poner letra } } break;
-				 */
+
+				case 2:// juego total del ahorcado
+					
+					
+					
+					
+					
+					
+					/*for (int i = 0; i < palSepar.length; i++) {
+
+						if (opcion == palSepar[i]) { // metodo poner letra } } break;
+						}
+					}*/
 				case 3:
 					try {
 						do {// opciones diccionario

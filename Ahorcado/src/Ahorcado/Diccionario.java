@@ -35,7 +35,7 @@ public class Diccionario extends Ahorcado {
 		PrintWriter pw = new PrintWriter(new FileWriter("diccionario", true));
 		String frase;
 		do {
-			System.out.println("Dime una frase");
+			System.out.println("Dime una palabra");
 			frase = lector.nextLine();
 			if (!frase.equals("fin")) {
 				pw.println(frase);
