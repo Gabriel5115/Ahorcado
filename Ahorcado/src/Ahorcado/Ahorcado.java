@@ -1,9 +1,91 @@
 package Ahorcado;
 
 public class Ahorcado {
-	protected static String palabras[]={ "Pedro", "Gabriel", "Gema", "Sergio"};
 	protected int fallos;
-	protected String palabra;
 	protected char palSepar[];
-	protected char lineasAdivi[];
+
+	protected int lineasAdivi;
+	// array de letras ya puestas
+
+	public Ahorcado() {
+		this.fallos=6;
+		this.lineasAdivi=6;
+	}
+
+	public int getFallos() {
+		return fallos;
+	}
+
+	public void setFallos(int fallos) {
+		this.fallos = fallos;
+	}
+
+	public char[] getPalSepar() {
+		return palSepar;
+	}
+
+	public void setPalSepar(char[] palSepar) {
+		this.palSepar = palSepar;
+	}
+
+	public int getLineasAdivi() {
+		return lineasAdivi;
+	}
+
+	public void setLineasAdivi(int lineasAdivi) {
+		this.lineasAdivi = lineasAdivi;
+	}
+
+	public void inicioAhorcado() {
+		fallos = 6;
+		char opcion = 0;
+		do {
+
+			for (int i = 0; i < palSepar.length; i++) {
+				if (opcion == palSepar[i]) {
+					// metodo poner letra
+				}
+			}
+
+		} while (true);
+	}
+
+	public void separarPal(String palabra) {
+		char palSepar[] = palabra.toCharArray();
+
+		this.lineasAdivi = palSepar.length;
+	}
+
+	public void printLine() {
+		for (int i = 0; i < lineasAdivi; i++) {
+			System.out.print("| _ |");
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
