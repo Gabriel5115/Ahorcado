@@ -55,7 +55,7 @@ public class Ahorcado {
 			System.out.println("| 3 Diccionario      |");
 			System.out.println("| 4 Salir            |");
 			System.out.println("----------------------");
-			System.out.println("V 1.0                                 Creadores Gabriel García Gámez y Sergio Martín Herrero");
+			System.out.println("V 1.0|  | Creadores Gabriel García Gámez y Sergio Martín Herrero");
 			try {
 				opcion = Integer.parseInt(br.readLine());
 				switch (opcion) {// switch principal
