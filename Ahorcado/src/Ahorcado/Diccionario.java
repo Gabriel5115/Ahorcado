@@ -10,11 +10,10 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Diccionario extends Ahorcado {
-	
+
 	protected String palabras[];
 	protected String palabra;
 
-	
 	public String[] getPalabras() {
 		return palabras;
 	}
@@ -23,53 +22,45 @@ public class Diccionario extends Ahorcado {
 		this.palabras = palabras;
 	}
 
-
-
 	public String getPalabra() {
 		return palabra;
 	}
-
-
 
 	public void setPalabra(String palabra) {
 		this.palabra = palabra;
 	}
 
-
-
 	public static void informacionAh() throws IOException {
 		Scanner lector = new Scanner(System.in);
-		PrintWriter pw=new PrintWriter(new FileWriter("diccionario", true));
+		PrintWriter pw = new PrintWriter(new FileWriter("diccionario", true));
 		String frase;
 		do {
 			System.out.println("Dime una frase");
-			frase=lector.nextLine();
+			frase = lector.nextLine();
 			if (!frase.equals("fin")) {
 				pw.println(frase);
 			}
 		} while (!frase.equals("fin"));
 		pw.close();
-		
+
 	}
-	
-	
-	
+
 	public String leerDicc() {
-		
+
 		BufferedReader bf;
-		String cadena="";
-		int h=0,cont=0,num=0;
+		String cadena = "";
+		int h = 0, cont = 0, num = 0;
 		System.out.println("Leyendo fichero....");
 		try {
-			bf = new BufferedReader(new FileReader("diccionario"));
+			bf = new BufferedReader(new FileReader("Diccionario"));
 			do {
-				cadena=bf.readLine();
-				if (cadena!=null || cadena!="-") {
+				cadena = bf.readLine();
+				if (cadena != null || cadena != "-") {
 					cont++;
 				}
-			} while (cadena !=null);
+			} while (cadena != null);
 			bf.close();
-			
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,37 +68,38 @@ public class Diccionario extends Ahorcado {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		palabras= new String[cont];
+		palabras = new String[cont];
 		for (int i = 0; i < palabras.length; i++) {
-			palabras[i]=cadena;
+			palabras[i] = cadena;
 		}
-		
-		
-		num=(int) (Math.random()*cont);
-		palabra=palabras[num];
+
+		num = (int) (Math.random() * cont);
+		palabra = palabras[num];
 		return palabra;
 	}
-	
-	
-	public static void printDicc() {
 
-		System.out.println("Leyendo archivo...");
-		Scanner lf;
-		String cadena;
-		lf = new Scanner("diccionario");
-		do {
-			cadena=lf.nextLine();
-			if (cadena !=null) {
-				System.out.println(cadena);
-			}
-		} while (lf.hasNextLine());
-		System.out.println("------Fin del diccionario-----");
-		lf.close();
+	public static void printDicc() {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("Diccionario"));
+			String cadena;
+			System.out.println("Leyendo diccionario...");
+
+			cadena=br.readLine();
+			do {
+
+				cadena = br.readLine();
+				if (cadena != null) {
+					System.out.println(cadena);
+				}
+			} while (cadena != null);
+			System.out.println("------Fin del archivo-----");
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		
-		
+
 	}
-	
-	
-	
+
 }

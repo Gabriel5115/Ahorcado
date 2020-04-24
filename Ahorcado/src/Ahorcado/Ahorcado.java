@@ -44,7 +44,6 @@ public class Ahorcado {
 		int opcion = 0, opcion2;
 		System.out.println("Hola bienvenido al ahoracado");
 		System.out.println("Elija una de las cuatro opciones");
-		
 
 		do {
 			System.out.println("----------------------");
@@ -55,32 +54,31 @@ public class Ahorcado {
 			System.out.println("| 3 Diccionario      |");
 			System.out.println("| 4 Salir            |");
 			System.out.println("----------------------");
-			System.out.println("V 1.0|  | Creadores Gabriel García Gámez y Sergio Martín Herrero");
+			System.out.println("V 1.0    Creadores Gabriel García Gámez y Sergio Martín Herrero");
 			try {
 				opcion = Integer.parseInt(br.readLine());
 				switch (opcion) {// switch principal
 				case 1:
-					
-					System.out.println("Las normas son muy sencillas tienes 6 intentos y solo puedes poner letras no se aceptan ni numeros ni espacios");
+
+					System.out.println(
+							"Las normas son muy sencillas tienes 6 intentos y solo puedes poner letras no se aceptan ni numeros ni espacios");
 					System.out.println("No se puede repetir las letras que ya has escrito");
 					break;
-				/*case 2:// juego total del ahorcado
-					for (int i = 0; i < palSepar.length; i++) {
-						if (opcion == palSepar[i]) {
-							// metodo poner letra
-						}
-					}
-					break;*/
+				/*
+				 * case 2:// juego total del ahorcado for (int i = 0; i < palSepar.length; i++)
+				 * { if (opcion == palSepar[i]) { // metodo poner letra } } break;
+				 */
 				case 3:
-					do {//opciones ddiccionario
-						System.out.println("----------------------");
-						System.out.println("| OPCIONES           |");
-						System.out.println("----------------------");
-						System.out.println("| 1 Listar Dicc      |");
-						System.out.println("| 2 Administrar Dicc |");
-						System.out.println("| 3 Menú principal   |");
-						System.out.println("----------------------");
-						try {
+					try {
+						do {// opciones diccionario
+							System.out.println("----------------------");
+							System.out.println("| OPCIONES           |");
+							System.out.println("----------------------");
+							System.out.println("| 1 Listar Dicc      |");
+							System.out.println("| 2 Administrar Dicc |");
+							System.out.println("| 3 Menú principal   |");
+							System.out.println("----------------------");
+
 							opcion2 = Integer.parseInt(br.readLine());
 							switch (opcion2) {
 							case 1:
@@ -88,21 +86,21 @@ public class Ahorcado {
 								break;
 							case 2:
 								System.out.println("Digame la contraseña");
-								String cadena=br.readLine();
+								String cadena = br.readLine();
 								if (cadena.equalsIgnoreCase("ahorcado")) {
 									Diccionario.informacionAh();
 								}
-								
+
 								break;
 							default:
 								break;
 							}
+						} while (opcion2 != 3);
 
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					} while (opcion != 3);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 					break;
 				case 4:
