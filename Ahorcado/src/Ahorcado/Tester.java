@@ -6,9 +6,10 @@ public class Tester {
 		int no;
 		Ahorcado ahorcado= new Ahorcado();
 		
-		//ahorcado.inicioAhorcado();
 		System.out.println("Prueba");
-		//ahorcado.printLine();
+		ahorcado.inicioAhorcado();
+		
+		
 		
 	}
 

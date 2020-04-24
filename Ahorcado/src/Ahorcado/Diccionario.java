@@ -68,6 +68,7 @@ public class Diccionario extends Ahorcado {
 					cont++;
 				}
 			} while (cadena !=null);
+			bf.close();
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -88,7 +89,21 @@ public class Diccionario extends Ahorcado {
 	}
 	
 	
-	public void printDicc() {
+	public static void printDicc() {
+
+		System.out.println("Leyendo archivo...");
+		Scanner lf;
+		String cadena;
+		lf = new Scanner("diccionario");
+		do {
+			cadena=lf.nextLine();
+			if (cadena !=null) {
+				System.out.println(cadena);
+			}
+		} while (lf.hasNextLine());
+		System.out.println("------Fin del diccionario-----");
+		lf.close();
+		
 		
 		
 	}
