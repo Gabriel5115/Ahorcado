@@ -8,7 +8,7 @@ public class Tester {
 		
 		//ahorcado.inicioAhorcado();
 		System.out.println("Prueba");
-		ahorcado.printLine();
+		//ahorcado.printLine();
 		
 	}
 

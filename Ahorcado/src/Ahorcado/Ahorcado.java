@@ -9,7 +9,7 @@ public class Ahorcado {
 
 	public Ahorcado() {
 		this.fallos=6;
-		this.lineasAdivi=6;
+		this.lineasAdivi=0;
 	}
 
 	public int getFallos() {
@@ -50,13 +50,15 @@ public class Ahorcado {
 		} while (true);
 	}
 
-	public void separarPal(String palabra) {
+	public int separarPal(String palabra) {
 		char palSepar[] = palabra.toCharArray();
 
 		this.lineasAdivi = palSepar.length;
+		
+		return lineasAdivi;
 	}
 
-	public void printLine() {
+	public void printLine(int lisenasAdivi) {
 		for (int i = 0; i < lineasAdivi; i++) {
 			System.out.print("| _ |");
 		}
