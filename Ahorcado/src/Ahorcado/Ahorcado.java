@@ -3,12 +3,14 @@ package Ahorcado;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Ahorcado {
 	protected int fallos;
 	protected char palSepar[];
 	protected int lineasAdivi;
 	// array de letras ya puestas
+	protected char letra;
 
 	public Ahorcado() {
 		this.fallos = 6;
@@ -39,8 +41,9 @@ public class Ahorcado {
 		this.lineasAdivi = lineasAdivi;
 	}
 
-	public void inicioAhorcado() {
+	public void inicioAhorcado(String palabra) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		Scanner lector = new Scanner(System.in);
 		int opcion = 0, opcion2;
 		System.out.println("Hola bienvenido al ahoracado");
 		System.out.println("Elija una de las cuatro opciones");
@@ -54,7 +57,7 @@ public class Ahorcado {
 			System.out.println("| 3 Diccionario      |");
 			System.out.println("| 4 Salir            |");
 			System.out.println("----------------------");
-			System.out.println("V 1.0    Creadores Gabriel García Gámez y Sergio Martín Herrero");
+			System.out.println("Creadores Gabriel García Gámez y Sergio Martín Herrero  Ahorcado Clase  V 1.0 ©");
 			try {
 				opcion = Integer.parseInt(br.readLine());
 				switch (opcion) {// switch principal
@@ -66,17 +69,29 @@ public class Ahorcado {
 					break;
 
 				case 2:// juego total del ahorcado
-					
-					
-					
-					
-					
-					
-					/*for (int i = 0; i < palSepar.length; i++) {
+					do {
+						//Diccionario.leerDicc();
+						separarPal(palabra);
+						printLine(lineasAdivi);
+						System.out.println("Digame una letra");
+						letra = (char) System.in.read();
+						for (int i = 0; i < palSepar.length; i++) {
+							//if (palSepar[i].) {
 
-						if (opcion == palSepar[i]) { // metodo poner letra } } break;
+								if (palSepar.equals(letra)) { // metodo poner letra } } break;
+									
+
+								} else {// numero de intentos
+									fallos--;
+									System.out.println("Ohhhh, Has fallado... Siguelo intentando. Te quedan: "+fallos+" intentos");
+									Dibujar.munecote(fallos);
+
+								//}
+							}
 						}
-					}*/
+					} while (opcion == 0);
+
+					break;
 				case 3:
 					try {
 						do {// opciones diccionario
@@ -139,6 +154,16 @@ public class Ahorcado {
 		for (int i = 0; i < lineasAdivi; i++) {
 			System.out.print("| _ |");
 		}
+	}
+
+	public boolean finPartida(int fallos) {
+		boolean h = false;
+		if (fallos == 0) {
+			h = true;
+		}
+
+		return h;
+
 	}
 
 }

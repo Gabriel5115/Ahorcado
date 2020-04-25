@@ -2,9 +2,9 @@ package Ahorcado;
 
 public class Dibujar {
 
-	public void munecote(int i) {
+	public static void munecote(int fallos) {
 		
-	        switch (i) {
+	        switch (fallos) {
 	            case 6:
 	                System.out.println(" ---------------------");
 	                
