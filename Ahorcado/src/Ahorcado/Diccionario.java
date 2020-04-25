@@ -11,9 +11,18 @@ import java.util.Scanner;
 
 public class Diccionario extends Ahorcado {
 
-	protected String palabras[];
-	protected String palabra;
-
+	protected static String palabras[];
+	protected static String palabra;
+	
+	
+	public Diccionario() {
+		this.palabra="nombre";
+	}
+	
+	public Diccionario(String palabra) {
+		this.palabra=palabra;
+	}
+	
 	public String[] getPalabras() {
 		return palabras;
 	}
@@ -45,22 +54,35 @@ public class Diccionario extends Ahorcado {
 
 	}
 
-	public String leerDicc() {
-
+	public static String[] leerDicc() {
 		BufferedReader bf;
-		String cadena = "";
-		int h = 0, cont = 0, num = 0;
+		String cadena;
+		int h = 0, cont = 0, num = 0, i=0;
+		String [] palabras = new String[20];
 		System.out.println("Leyendo fichero....");
 		try {
 			bf = new BufferedReader(new FileReader("Diccionario"));
 			do {
 				cadena = bf.readLine();
-				if (cadena != null || cadena != "-") {
+				if (cadena != null) {
 					cont++;
+					
 				}
 			} while (cadena != null);
 			bf.close();
-
+			palabras = new String[cont];
+			bf = new BufferedReader(new FileReader("Diccionario"));
+			do {
+				cadena = bf.readLine();
+				if (cadena != null) {
+					palabras[i]=cadena;
+					i++;
+					
+				}
+			} while (cadena != null);
+			bf.close();
+			
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -68,14 +90,9 @@ public class Diccionario extends Ahorcado {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		palabras = new String[cont];
-		for (int i = 0; i < palabras.length; i++) {
-			palabras[i] = cadena;
-		}
-
-		num = (int) (Math.random() * cont);
-		palabra = palabras[num];
-		return palabra;
+		
+		return palabras;
+	        
 	}
 
 	public static void printDicc() {

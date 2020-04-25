@@ -7,12 +7,14 @@ public class Tester {
 
 	public static void main(String[] args) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		Diccionario diccionario = null;
 		
-		int no;
-		String palabra="";
+		
+		
+		String palabras[]=Diccionario.leerDicc();
 		Ahorcado ahorcado= new Ahorcado();
 		
-		ahorcado.inicioAhorcado(palabra);
+		ahorcado.inicioAhorcado(palabras);
 		
 		
 		
