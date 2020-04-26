@@ -59,7 +59,6 @@ public class Diccionario extends Ahorcado {
 		String cadena;
 		int h = 0, cont = 0, num = 0, i=0;
 		String [] palabras = new String[20];
-		System.out.println("Leyendo fichero....");
 		try {
 			bf = new BufferedReader(new FileReader("Diccionario"));
 			do {

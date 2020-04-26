@@ -7,7 +7,7 @@ public class Tester {
 
 	public static void main(String[] args) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		Diccionario diccionario = null;
+		
 		
 		
 		

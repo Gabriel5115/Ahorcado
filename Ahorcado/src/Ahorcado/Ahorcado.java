@@ -12,6 +12,8 @@ public class Ahorcado {
 	protected String palabra;
 	// array de letras ya puestas
 	protected char letra;
+	protected char[] copiaSepar;
+	protected char[] vacio;
 
 	public Ahorcado() {
 		this.fallos = 6;
@@ -42,11 +44,36 @@ public class Ahorcado {
 		this.lineasAdivi = lineasAdivi;
 	}
 
+	public String getPalabra() {
+		return palabra;
+	}
+
+	public void setPalabra(String palabra) {
+		this.palabra = palabra;
+	}
+
+	public char getLetra() {
+		return letra;
+	}
+
+	public void setLetra(char letra) {
+		this.letra = letra;
+	}
+
+	public char[] getCopiaSepar() {
+		return copiaSepar;
+	}
+
+	public void setCopiaSepar(char[] copiaSepar) {
+		this.copiaSepar = copiaSepar;
+	}
+
 	public void inicioAhorcado(String[] palabras) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Scanner lector = new Scanner(System.in);
 		int opcion = 0, opcion2;
 		boolean a = false;
+		boolean no = true;
 
 		System.out.println("Hola bienvenido al ahoracado");
 		System.out.println("Elija una de las cuatro opciones");
@@ -76,24 +103,16 @@ public class Ahorcado {
 
 						separarPal(palabras);
 						printLine(lineasAdivi);
+						copyPal(palSepar);
 						do {
-							System.out.println("Digame una letra");
-							letra = (char) System.in.read();
-							System.in.read();
-							for (int i = 0; i < palSepar.length; i++) {
-								if (palSepar[i] == letra) { // metodo poner letra } } break;
-									a = true;
 
-								}
-							}
-
-							if (a == false) {
+							if (ponerLetra(copiaSepar) == false) {
 								fallos--;
 								System.out.println(
 										"Ohhhh, Has fallado... Siguelo intentando. Te quedan: " + fallos + " intentos");
 								Dibujar.munecote(fallos);
 							}
-						} while (!(palabra.equalsIgnoreCase(palabra)));
+						} while (fallos == 0);
 
 						break;
 					case 3:
@@ -155,7 +174,9 @@ public class Ahorcado {
 		int num = (int) (Math.random() * palabras.length);
 
 		this.lineasAdivi = palabras[num].length();
+		this.palabra = palabras[num];
 		palSepar = palabras[num].toCharArray();
+
 		return palSepar;
 	}
 
@@ -175,6 +196,49 @@ public class Ahorcado {
 
 		return h;
 
+	}
+
+	public char[] copyPal(char[] palSepar) {
+
+		this.copiaSepar = new char[palSepar.length];
+		this.vacio = new char[copiaSepar.length];
+		for (int i = 0; i < palSepar.length; i++) {
+			this.copiaSepar[i] = palSepar[i];
+		}
+
+		return copiaSepar;
+
+	}
+
+	public boolean ponerLetra(char[] copiaSepar) {
+		Scanner lector = new Scanner(System.in);
+		int num = 0;
+		boolean a = false;
+
+		System.out.println("Dime una letra");
+		try {
+			letra = (char) System.in.read();
+			System.in.read();
+			System.in.read();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		for (int i = 0; i < copiaSepar.length; i++) {
+			if (letra == copiaSepar[i]) {
+				vacio[i] = letra;
+				a = true;
+			}
+		}
+
+		for (int i = 0; i < vacio.length; i++) {
+			if (Character.toString(letra) != null) {
+				System.out.print("| " + Character.toString(vacio[i]) + " |");
+			}
+		}
+		System.out.println("\n");
+		return a;
 	}
 
 }
