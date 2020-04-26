@@ -112,7 +112,7 @@ public class Ahorcado {
 										"Ohhhh, Has fallado... Siguelo intentando. Te quedan: " + fallos + " intentos");
 								Dibujar.munecote(fallos);
 							}
-						} while (fallos == 0);
+						} while (fallos != 0);
 
 						break;
 					case 3:
