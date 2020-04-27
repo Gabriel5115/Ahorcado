@@ -9,29 +9,33 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class Diccionario extends Ahorcado {
+public class Diccionario {
 
 
-	public static void informacionAh() throws IOException {
-		Scanner lector = new Scanner(System.in);
-		PrintWriter pw = new PrintWriter(new FileWriter("diccionario", true));
-		String frase;
-		do {
-			System.out.println("Dime una palabra");
-			frase = lector.nextLine();
-			if (!frase.equals("fin")) {
-				pw.println(frase);
-			}
-		} while (!frase.equals("fin"));
-		pw.close();
-
-	}
+	public static void informacionAh() {
+        PrintWriter pw;
+        String frase;
+        try {
+            Scanner lector = new Scanner(System.in);
+            pw = new PrintWriter(new FileWriter("diccionario", true));
+            do {
+                System.out.println("Introduce una palabra (introduce 'salida' para salir)");
+                frase = lector.nextLine();
+                if (!frase.equals("salida")) {
+                    pw.println(frase);
+                }
+            } while (!frase.equals("salida"));
+            pw.close();
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+        }
+    }
 
 	public static String[] leerDicc() {
 		BufferedReader bf;
 		String cadena;
-		int h = 0, cont = 0, num = 0, i=0;
-		String [] palabras = new String[20];
+		int cont = 0, i=0;
+		String [] palabras = new String[100];
 		try {
 			bf = new BufferedReader(new FileReader("Diccionario"));
 			do {

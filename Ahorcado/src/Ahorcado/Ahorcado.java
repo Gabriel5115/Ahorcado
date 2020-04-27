@@ -10,7 +10,8 @@ public class Ahorcado {
 	protected char palSepar[];
 	protected int lineasAdivi;
 	protected String palabra;
-	// array de letras ya puestas
+	protected char[] letraP;// array de letras ya puestas
+
 	protected char letra;
 	protected char[] copiaSepar;
 	protected char[] vacio;
@@ -90,11 +91,14 @@ public class Ahorcado {
 				System.out.println("| 4 Salir            |");
 				System.out.println("----------------------");
 				System.out.println("Creadores Gabriel García Gámez y Sergio Martín Herrero  Ahorcado Clase  V 1.0 ©");
+				System.out.println(" \t\t\t\tCopyright (c) 2020 1º DAW \r\n" + 
+						" \t \t \t \tAll Rights Reserved\r\n" +  
+						" \t \t \t \tThis product is protected by copyright and distributed under\r\n" + 
+						" \t \t \t \tlicenses restricting copying, distribution, and decompilation.");
 				try {
 					opcion = Integer.parseInt(br.readLine());
 					switch (opcion) {// switch principal
 					case 1:
-
 						System.out.println(
 								"Las normas son muy sencillas tienes 6 intentos y solo puedes poner letras no se aceptan ni numeros ni espacios");
 						System.out.println("No se puede repetir las letras que ya has escrito");
@@ -106,14 +110,14 @@ public class Ahorcado {
 						printLine(lineasAdivi);
 						copyPal(palSepar);
 						do {
-							if (ponerLetra(copiaSepar,victoria) == false) {
+							if (ponerLetra(copiaSepar, victoria) == false) {
 								fallos--;
 								System.out.println(
 										"Ohhhh, Has fallado... Siguelo intentando. Te quedan: " + fallos + " intentos");
 								Dibujar.munecote(fallos);
 							}
-						} while (fallos != 0&&victoria!=1);
-						if (finPartida(fallos)==true) {
+						} while (fallos != 0 && victoria != 1);
+						if (finPartida(fallos) == true) {
 							System.out.println("La palabra era: " + palabra);
 							System.out.println("Lo siento has perdido, mas suerte la proxima vez!!!!");
 						}
@@ -168,7 +172,7 @@ public class Ahorcado {
 				}
 
 			} while (opcion != 4);
-		} while (finPartida(fallos) == false&&opcion!=4);// final del juego
+		} while (finPartida(fallos) == false && opcion != 4);// final del juego
 
 	}
 
@@ -194,7 +198,7 @@ public class Ahorcado {
 		boolean h = false;
 		if (fallos == 0) {
 			h = true;
-			
+
 		}
 
 		return h;
@@ -216,12 +220,14 @@ public class Ahorcado {
 	public boolean ponerLetra(char[] copiaSepar, int victoria) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Scanner lector = new Scanner(System.in);
-		int num = 0, cont=0;
-		boolean a = false;
+		int num = 0, cont = 0, cont2 = 0;
+		boolean a = false, a2 = false, a3=true;
+
 		String palAdivi;
 		String opcion;
-		
-		System.out.println("Que opción quieres Advinar  o poner letra ");
+		letraP = new char[6];
+
+		System.out.println("Que opción quieres adivinar  o poner letra ");
 		try {
 			opcion = br.readLine();
 			if (opcion.equalsIgnoreCase("Adivinar")) {
@@ -229,8 +235,8 @@ public class Ahorcado {
 				palAdivi = br.readLine();
 				if (palabra.equalsIgnoreCase(palAdivi)) {
 					a = true;
-					System.out.println("ENHORABUENA HAS ACERTADO LA PALABRA!!!!");
-					this.victoria=1;
+					System.out.println("ENHORABUENA HAS ACERTADO LA PALABRA, ERES UN MAQUINOTE, SIGUE JUGANDO!!!!");
+					this.victoria = 1;
 					for (int i = 0; i < copiaSepar.length; i++) {
 						System.out.print("| " + copiaSepar[i] + " |");
 					}
@@ -239,11 +245,32 @@ public class Ahorcado {
 					System.out.println("Lo siento esa palabra no es esa");
 				}
 			} else {
-				System.out.println("Dime una letra");
+
 				try {
-					letra = (char) System.in.read();
-					System.in.read();
-					System.in.read();
+					do {
+						System.out.println("Dime una letra");
+						letra = (char) System.in.read();
+						System.in.read();
+						System.in.read();
+
+						for (int i = 0; i < letraP.length; i++) {
+							if (letraP[i] !=0) {
+								if (letraP[i]==letra) {
+									a3=true;
+									System.out.println("Letra ya introducida, por favor introduzca otra letra diferente");
+								}
+							}
+						}
+						for (int i = 0; i < letraP.length && a2 == false; i++) {
+							if (letraP[i] == 0) {
+								a2 = true;
+								letraP[i] = letra;
+							}
+							
+
+						}
+					} while (a2==false&&a3==true);
+
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -264,25 +291,22 @@ public class Ahorcado {
 					}
 				}
 				for (int i = 0; i < vacio.length; i++) {
-					if (vacio[i]!=0) {
+					if (vacio[i] != 0) {
 						cont++;
 					}
 				}
-				if (cont==vacio.length) {
+				if (cont == vacio.length) {
 					System.out.println("\n");
-					this.victoria=1;
+					this.victoria = 1;
 					System.out.println("ENHORABUENA HAS ACERTADO LA PALABRA!!!!");
 				}
 			}
+
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
 		System.out.println("\n");
 		return a;
 	}
-	
-	
 
 }

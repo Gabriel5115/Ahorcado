@@ -18,8 +18,8 @@ public class Bitacoras {
 	 * Implementado metodo poner letras y arreglado bugs de en algunos bucles y arreglado fallo metodo poner letra.
 	 * Atributos Diccionario quitados ya que no hacen falta
 	 * cambiado metodo separarPal de un array de char a un metodo void ya que modificamos un atributo.
-	 * Agregada la opcion de adivinar la plabra.ç
-	 * Establecido final del juego.
+	 * Agregada la opcion de adivinar la plabra.
+	 * Establecido final del juego si acierta la palabra entera o si la hacierta letra a letra.
 	 * 
 	 * 
 	 * 27/04/2020
