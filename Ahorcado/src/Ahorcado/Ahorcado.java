@@ -168,7 +168,7 @@ public class Ahorcado {
 				}
 
 			} while (opcion != 4);
-		} while (finPartida(fallos) == false);// final del juego
+		} while (finPartida(fallos) == false&&opcion!=4);// final del juego
 
 	}
 
@@ -216,7 +216,7 @@ public class Ahorcado {
 	public boolean ponerLetra(char[] copiaSepar, int victoria) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Scanner lector = new Scanner(System.in);
-		int num = 0;
+		int num = 0, cont=0;
 		boolean a = false;
 		String palAdivi;
 		String opcion;
@@ -262,6 +262,16 @@ public class Ahorcado {
 					} else {
 						System.out.print("| " + vacio[i] + " |");
 					}
+				}
+				for (int i = 0; i < vacio.length; i++) {
+					if (vacio[i]!=0) {
+						cont++;
+					}
+				}
+				if (cont==vacio.length) {
+					System.out.println("\n");
+					this.victoria=1;
+					System.out.println("ENHORABUENA HAS ACERTADO LA PALABRA!!!!");
 				}
 			}
 		} catch (IOException e1) {
