@@ -11,33 +11,6 @@ import java.util.Scanner;
 
 public class Diccionario extends Ahorcado {
 
-	protected static String palabras[];
-	protected static String palabra;
-	
-	
-	public Diccionario() {
-		this.palabra="nombre";
-	}
-	
-	public Diccionario(String palabra) {
-		this.palabra=palabra;
-	}
-	
-	public String[] getPalabras() {
-		return palabras;
-	}
-
-	public void setPalabras(String[] palabras) {
-		this.palabras = palabras;
-	}
-
-	public String getPalabra() {
-		return palabra;
-	}
-
-	public void setPalabra(String palabra) {
-		this.palabra = palabra;
-	}
 
 	public static void informacionAh() throws IOException {
 		Scanner lector = new Scanner(System.in);

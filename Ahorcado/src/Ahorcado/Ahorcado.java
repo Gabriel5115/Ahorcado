@@ -14,6 +14,7 @@ public class Ahorcado {
 	protected char letra;
 	protected char[] copiaSepar;
 	protected char[] vacio;
+	protected int victoria;
 
 	public Ahorcado() {
 		this.fallos = 6;
@@ -105,15 +106,17 @@ public class Ahorcado {
 						printLine(lineasAdivi);
 						copyPal(palSepar);
 						do {
-
-							if (ponerLetra(copiaSepar) == false) {
+							if (ponerLetra(copiaSepar,victoria) == false) {
 								fallos--;
 								System.out.println(
 										"Ohhhh, Has fallado... Siguelo intentando. Te quedan: " + fallos + " intentos");
 								Dibujar.munecote(fallos);
 							}
-						} while (fallos != 0);
-
+						} while (fallos != 0&&victoria!=1);
+						if (finPartida(fallos)==true) {
+							System.out.println("La palabra era: " + palabra);
+							System.out.println("Lo siento has perdido, mas suerte la proxima vez!!!!");
+						}
 						break;
 					case 3:
 						try {
@@ -169,15 +172,14 @@ public class Ahorcado {
 
 	}
 
-	public char[] separarPal(String[] palabras) {
+	public void separarPal(String[] palabras) {
 
 		int num = (int) (Math.random() * palabras.length);
 
 		this.lineasAdivi = palabras[num].length();
-		this.palabra = palabras[num];
+		palabra = palabras[num];
 		palSepar = palabras[num].toCharArray();
 
-		return palSepar;
 	}
 
 	public void printLine(int lisenasAdivi) {
@@ -192,6 +194,7 @@ public class Ahorcado {
 		boolean h = false;
 		if (fallos == 0) {
 			h = true;
+			
 		}
 
 		return h;
@@ -210,35 +213,66 @@ public class Ahorcado {
 
 	}
 
-	public boolean ponerLetra(char[] copiaSepar) {
+	public boolean ponerLetra(char[] copiaSepar, int victoria) {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Scanner lector = new Scanner(System.in);
 		int num = 0;
 		boolean a = false;
-
-		System.out.println("Dime una letra");
+		String palAdivi;
+		String opcion;
+		
+		System.out.println("Que opción quieres Advinar  o poner letra ");
 		try {
-			letra = (char) System.in.read();
-			System.in.read();
-			System.in.read();
-		} catch (IOException e) {
+			opcion = br.readLine();
+			if (opcion.equalsIgnoreCase("Adivinar")) {
+				System.out.println("Introduzca la palabra");
+				palAdivi = br.readLine();
+				if (palabra.equalsIgnoreCase(palAdivi)) {
+					a = true;
+					System.out.println("ENHORABUENA HAS ACERTADO LA PALABRA!!!!");
+					this.victoria=1;
+					for (int i = 0; i < copiaSepar.length; i++) {
+						System.out.print("| " + copiaSepar[i] + " |");
+					}
+				} else {
+					a = false;
+					System.out.println("Lo siento esa palabra no es esa");
+				}
+			} else {
+				System.out.println("Dime una letra");
+				try {
+					letra = (char) System.in.read();
+					System.in.read();
+					System.in.read();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				for (int i = 0; i < copiaSepar.length; i++) {
+					if (letra == copiaSepar[i]) {
+						vacio[i] = letra;
+						a = true;
+					}
+				}
+
+				for (int i = 0; i < vacio.length; i++) {
+					if (vacio[i] == 0) {
+						System.out.print("| _ |");
+					} else {
+						System.out.print("| " + vacio[i] + " |");
+					}
+				}
+			}
+		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
 
-		for (int i = 0; i < copiaSepar.length; i++) {
-			if (letra == copiaSepar[i]) {
-				vacio[i] = letra;
-				a = true;
-			}
-		}
-
-		for (int i = 0; i < vacio.length; i++) {
-			if (Character.toString(letra) != null) {
-				System.out.print("| " + Character.toString(vacio[i]) + " |");
-			}
-		}
 		System.out.println("\n");
 		return a;
 	}
+	
+	
 
 }
