@@ -11,7 +11,6 @@ public class Ahorcado {
 	protected int lineasAdivi;
 	protected String palabra;
 	protected char[] letraP;// array de letras ya puestas
-
 	protected char letra;
 	protected char[] copiaSepar;
 	protected char[] vacio;
@@ -20,6 +19,7 @@ public class Ahorcado {
 	public Ahorcado() {
 		this.fallos = 6;
 		this.lineasAdivi = 0;
+		this.letraP = new char[10];
 	}
 
 	public int getFallos() {
@@ -73,7 +73,8 @@ public class Ahorcado {
 	public void inicioAhorcado(String[] palabras) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Scanner lector = new Scanner(System.in);
-		int opcion = 0, opcion2;
+		int opcion = 0, opcion2 = 0, cont2=0;
+		
 		boolean a = false;
 		boolean no = true;
 
@@ -91,12 +92,13 @@ public class Ahorcado {
 				System.out.println("| 4 Salir            |");
 				System.out.println("----------------------");
 				System.out.println("Creadores Gabriel García Gámez y Sergio Martín Herrero  Ahorcado Clase  V 1.0 ©");
-				System.out.println(" \t\t\t\tCopyright (c) 2020 1º DAW \r\n" + 
-						" \t \t \t \tAll Rights Reserved\r\n" +  
-						" \t \t \t \tThis product is protected by copyright and distributed under\r\n" + 
-						" \t \t \t \tlicenses restricting copying, distribution, and decompilation.");
+				System.out.println("Copyright (c) 2020 1º DAW \r\n" + "All Rights Reserved\r\n"
+						+ "This product is protected by copyright and distributed under\r\n"
+						+ "Licenses restricting copying, distribution, and decompilation.");
 				try {
 					opcion = Integer.parseInt(br.readLine());
+					
+					
 					switch (opcion) {// switch principal
 					case 1:
 						System.out.println(
@@ -105,7 +107,7 @@ public class Ahorcado {
 						break;
 
 					case 2:// juego total del ahorcado
-
+						cont2++;
 						separarPal(palabras);
 						printLine(lineasAdivi);
 						copyPal(palSepar);
@@ -134,6 +136,7 @@ public class Ahorcado {
 								System.out.println("----------------------");
 
 								opcion2 = Integer.parseInt(br.readLine());
+								
 								switch (opcion2) {
 								case 1:
 									Diccionario.printDicc();
@@ -164,9 +167,11 @@ public class Ahorcado {
 						System.out.println("Solo se puede elegir entre las opciones del 1 al 4");
 						break;
 					}
-				} catch (NumberFormatException |
 
-						IOException e1) {
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					System.err.println("No se admiten letras, solo números");
+				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -187,6 +192,7 @@ public class Ahorcado {
 	}
 
 	public void printLine(int lisenasAdivi) {
+
 		for (int i = 0; i < lineasAdivi; i++) {
 			System.out.print("| _ |");
 
@@ -212,7 +218,10 @@ public class Ahorcado {
 		for (int i = 0; i < palSepar.length; i++) {
 			this.copiaSepar[i] = palSepar[i];
 		}
-
+			for (int i = 0; i < letraP.length;i++) {
+				letraP[i]=0;
+			}
+			this.victoria=0;
 		return copiaSepar;
 
 	}
@@ -220,13 +229,13 @@ public class Ahorcado {
 	public boolean ponerLetra(char[] copiaSepar, int victoria) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Scanner lector = new Scanner(System.in);
-		int num = 0, cont = 0, cont2 = 0;
-		boolean a = false, a2 = false, a3=true;
-
+		int num = 0, cont = 0;
+		boolean a = false, a2 = false, a3 = false, fail = true;
+		
 		String palAdivi;
 		String opcion;
-		letraP = new char[6];
-
+		
+		
 		System.out.println("Que opción quieres adivinar  o poner letra ");
 		try {
 			opcion = br.readLine();
@@ -245,36 +254,46 @@ public class Ahorcado {
 					System.out.println("Lo siento esa palabra no es esa");
 				}
 			} else {
+				do {
+					fail=true;
+					try {
 
-				try {
-					do {
-						System.out.println("Dime una letra");
-						letra = (char) System.in.read();
-						System.in.read();
-						System.in.read();
-
-						for (int i = 0; i < letraP.length; i++) {
-							if (letraP[i] !=0) {
-								if (letraP[i]==letra) {
-									a3=true;
-									System.out.println("Letra ya introducida, por favor introduzca otra letra diferente");
+						do {
+							System.out.println("Dime una letra");
+							letra = (char) System.in.read();
+							System.in.read();
+							System.in.read();
+							Comprobaciones.comprobarNumero(letra);
+							a3 = false;
+							for (int i = 0; i < letraP.length; i++) {
+								if (letraP[i] != 0) {
+									if (letraP[i] == letra) {
+										a3 = true;
+										System.out.println(
+												"Letra ya introducida, por favor introduzca otra letra diferente");
+									}
 								}
 							}
-						}
-						for (int i = 0; i < letraP.length && a2 == false; i++) {
-							if (letraP[i] == 0) {
-								a2 = true;
-								letraP[i] = letra;
+							for (int i = 0; i < letraP.length && a2 == false; i++) {
+								if (letraP[i] == 0 && a3 == false) {
+									a2 = true;
+									letraP[i] = letra;
+									a3 = false;
+								}
+
 							}
-							
+						} while (a2 == false && a3 == true);
 
-						}
-					} while (a2==false&&a3==true);
+					} catch (IOException e) {
+						fail = false;
 
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+						System.err.println(e.getMessage());
+					} catch (falloLetra e) {
+						fail = false;
+						System.err.println(e.getMessage());
+						System.err.println("Solo puedes introducir letras no esta permitido numeros");
+					}
+				} while (fail == false);
 
 				for (int i = 0; i < copiaSepar.length; i++) {
 					if (letra == copiaSepar[i]) {
@@ -300,6 +319,13 @@ public class Ahorcado {
 					this.victoria = 1;
 					System.out.println("ENHORABUENA HAS ACERTADO LA PALABRA!!!!");
 				}
+			}
+			System.out.println("\nLetras usadas");
+			for (int i = 0; i < letraP.length; i++) {
+				if (letraP[i] != 0) {
+					System.out.print("[" + letraP[i] + "]");
+				}
+
 			}
 
 		} catch (IOException e1) {

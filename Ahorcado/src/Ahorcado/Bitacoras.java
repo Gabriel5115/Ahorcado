@@ -23,8 +23,15 @@ public class Bitacoras {
 	 * 
 	 * 
 	 * 27/04/2020
+	 * Implementado el array de letras ya escritas arreglado parte de que si detecta una letra ya escrita salte mensaje para avisar al usuario que esa letra ya esta introducida
+	 * Realizado parte de diagrama de clases.
 	 * 
+	 * 28/04/2020
 	 * 
+	 * Implemenntacion de excepciones propias
+	 * arreglar que el diccionario cargue las palabras en mayusculas
+	 * aniadir otras excepciones que quedan
+	 * Arreglado fallo de victoria y reseteado las letras puestas cuando vuelves a jugar
 	 * 
 	 * 
 	 * 
