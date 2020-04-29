@@ -73,10 +73,10 @@ public class Ahorcado {
 	public void inicioAhorcado(String[] palabras) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Scanner lector = new Scanner(System.in);
-		int opcion = 0, opcion2 = 0, cont2=0;
-		
+		int opcion = 0, opcion2 = 0, cont2 = 0;
+		String opcion3, opcion4;
 		boolean a = false;
-		boolean no = true;
+		boolean no = true, fail = true;
 
 		System.out.println("Hola bienvenido al ahoracado");
 		System.out.println("Elija una de las cuatro opciones");
@@ -95,86 +95,100 @@ public class Ahorcado {
 				System.out.println("Copyright (c) 2020 1º DAW \r\n" + "All Rights Reserved\r\n"
 						+ "This product is protected by copyright and distributed under\r\n"
 						+ "Licenses restricting copying, distribution, and decompilation.");
-				try {
-					opcion = Integer.parseInt(br.readLine());
-					
-					
-					switch (opcion) {// switch principal
-					case 1:
-						System.out.println(
-								"Las normas son muy sencillas tienes 6 intentos y solo puedes poner letras no se aceptan ni numeros ni espacios");
-						System.out.println("No se puede repetir las letras que ya has escrito");
-						break;
+				do {
 
-					case 2:// juego total del ahorcado
-						cont2++;
-						separarPal(palabras);
-						printLine(lineasAdivi);
-						copyPal(palSepar);
-						do {
-							if (ponerLetra(copiaSepar, victoria) == false) {
-								fallos--;
-								System.out.println(
-										"Ohhhh, Has fallado... Siguelo intentando. Te quedan: " + fallos + " intentos");
-								Dibujar.munecote(fallos);
-							}
-						} while (fallos != 0 && victoria != 1);
-						if (finPartida(fallos) == true) {
-							System.out.println("La palabra era: " + palabra);
-							System.out.println("Lo siento has perdido, mas suerte la proxima vez!!!!");
-						}
-						break;
-					case 3:
-						try {
-							do {// opciones diccionario
-								System.out.println("----------------------");
-								System.out.println("| OPCIONES           |");
-								System.out.println("----------------------");
-								System.out.println("| 1 Listar Dicc      |");
-								System.out.println("| 2 Administrar Dicc |");
-								System.out.println("| 3 Menú principal   |");
-								System.out.println("----------------------");
+					try {
+						opcion = Integer.parseInt(br.readLine());
+						opcion3 = Integer.toString(opcion);
+						Comprobaciones.checkMenu(opcion3);
+						switch (opcion) {// switch principal
+						case 1:
+							System.out.println("----------------------");
+							System.out.println("|       NORMAS       |");
+							System.out.println("----------------------");
+							System.out.println("Las normas son muy sencillas tienes 6 intentos y solo puedes poner letras no se aceptan ni numeros ni espacios");
+							System.out.println("No se puede repetir las letras que ya has escrito");
+						
+							break;
 
-								opcion2 = Integer.parseInt(br.readLine());
-								
-								switch (opcion2) {
-								case 1:
-									Diccionario.printDicc();
-									break;
-								case 2:
-									System.out.println("Digame la contraseña");
-									String cadena = br.readLine();
-									if (cadena.equalsIgnoreCase("ahorcado")) {
-										Diccionario.informacionAh();
-									}
-
-									break;
-								default:
-									break;
+						case 2:// juego total del ahorcado
+							cont2++;
+							separarPal(palabras);
+							printLine(lineasAdivi);
+							copyPal(palSepar);
+							do {
+								if (ponerLetra(copiaSepar, victoria) == false) {
+									fallos--;
+									System.out.println("Ohhhh, Has fallado... Siguelo intentando. Te quedan: " + fallos
+											+ " intentos");
+									Dibujar.munecote(fallos);
 								}
-							} while (opcion2 != 3);
+							} while (fallos != 0 && victoria != 1);
+							if (finPartida(fallos) == true) {
+								System.out.println("La palabra era: " + palabra);
+								System.out.println("Lo siento has perdido, mas suerte la proxima vez!!!!");
+							}
+							break;
+						case 3:
 
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							try {
+								do {// opciones diccionario
+									System.out.println("----------------------");
+									System.out.println("| OPCIONES           |");
+									System.out.println("----------------------");
+									System.out.println("| 1 Listar Dicc      |");
+									System.out.println("| 2 Administrar Dicc |");
+									System.out.println("| 3 Menú principal   |");
+									System.out.println("----------------------");
+
+									opcion2 = Integer.parseInt(br.readLine());
+									opcion4 = Integer.toString(opcion2);
+									Comprobaciones.checkMenu2(opcion4);
+									switch (opcion2) {
+									case 1:
+										Diccionario.printDicc();
+										break;
+									case 2:
+											System.out.println("Digame la contraseña");
+											String cadena = br.readLine();
+											
+											if (cadena.equalsIgnoreCase("ahorcado")) {
+												Diccionario.informacionAh();
+											}
+
+										
+										break;
+									default:
+										break;
+									}
+								} while (opcion2 != 3);
+
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								System.err.println(e.getMessage());
+							}
+
+							break;
+						case 4:
+							System.out.println("Gracias por jugar nuestro Ahorcado hasta la próxima");
+							break;
+						default:
+							System.out.println("Solo se puede elegir entre las opciones del 1 al 4");
+							break;
 						}
 
-						break;
-					case 4:
-						System.out.println("Gracias por jugar nuestro Ahorcado hasta la próxima");
-						break;
-					default:
-						System.out.println("Solo se puede elegir entre las opciones del 1 al 4");
-						break;
+					} catch (NumberFormatException e1) {
+						fail = false;
+						System.err.println("No se admiten letras, solo números");
+					} catch (falloLetra e1) {
+						fail = false;
+						System.err.println(e1.getMessage());
+						System.err.println("No se admiten letras, solo números");
+					} catch (IOException e1) {
+						fail = false;
+						e1.printStackTrace();
 					}
-
-				} catch (NumberFormatException e1) {
-					// TODO Auto-generated catch block
-					System.err.println("No se admiten letras, solo números");
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				} while (fail = false);
 
 			} while (opcion != 4);
 		} while (finPartida(fallos) == false && opcion != 4);// final del juego
@@ -187,6 +201,7 @@ public class Ahorcado {
 
 		this.lineasAdivi = palabras[num].length();
 		palabra = palabras[num];
+		palabra=palabra.toUpperCase();
 		palSepar = palabras[num].toCharArray();
 
 	}
@@ -218,10 +233,10 @@ public class Ahorcado {
 		for (int i = 0; i < palSepar.length; i++) {
 			this.copiaSepar[i] = palSepar[i];
 		}
-			for (int i = 0; i < letraP.length;i++) {
-				letraP[i]=0;
-			}
-			this.victoria=0;
+		for (int i = 0; i < letraP.length; i++) {
+			letraP[i] = 0;
+		}
+		this.victoria = 0;
 		return copiaSepar;
 
 	}
@@ -231,17 +246,17 @@ public class Ahorcado {
 		Scanner lector = new Scanner(System.in);
 		int num = 0, cont = 0;
 		boolean a = false, a2 = false, a3 = false, fail = true;
-		
+
 		String palAdivi;
 		String opcion;
-		
-		
+
 		System.out.println("Que opción quieres adivinar  o poner letra ");
 		try {
 			opcion = br.readLine();
 			if (opcion.equalsIgnoreCase("Adivinar")) {
 				System.out.println("Introduzca la palabra");
 				palAdivi = br.readLine();
+				Comprobaciones.adiviPal(palAdivi);
 				if (palabra.equalsIgnoreCase(palAdivi)) {
 					a = true;
 					System.out.println("ENHORABUENA HAS ACERTADO LA PALABRA, ERES UN MAQUINOTE, SIGUE JUGANDO!!!!");
@@ -255,7 +270,7 @@ public class Ahorcado {
 				}
 			} else {
 				do {
-					fail=true;
+					fail = true;
 					try {
 
 						do {
@@ -263,6 +278,7 @@ public class Ahorcado {
 							letra = (char) System.in.read();
 							System.in.read();
 							System.in.read();
+							
 							Comprobaciones.comprobarNumero(letra);
 							a3 = false;
 							for (int i = 0; i < letraP.length; i++) {
@@ -330,6 +346,10 @@ public class Ahorcado {
 
 		} catch (IOException e1) {
 			e1.printStackTrace();
+		} catch (falloLetra e) {
+			// TODO Auto-generated catch block
+			System.err.println(e.getMessage());
+			System.err.println("No se puede introducir letra solo la palabra que quieras adivinar");
 		}
 		System.out.println("\n");
 		return a;
